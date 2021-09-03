@@ -1,0 +1,11 @@
+version: "3.6"
+services:
+    nodeserver:
+        build:
+            context: ./app
+    nginx:
+        restart: always
+        build:
+            context: ./nginx
+        ports:
+            - "8081:8080"
