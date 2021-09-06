@@ -50,6 +50,16 @@ $ kubectl delete -f .
 $ minikube stop
 
 # 3) Deployment to production
+Sono stati creati tramite configurazioni Terraform 2 repository ECR in cui fare il deploy delle immagini docker: react-app e nginx.
+Codebuild è stato utilizzato localmente con riferimento alla guida: https://aws.amazon.com/it/blogs/devops/announcing-local-build-support-for-aws-codebuild/.
 
+Dopo aver installato Codebuild localmente, è possibile eseguire il deploy delle app su ECR utilizzando lo script di depoly codebuild_build.sh.
+Per il deploy dell'app:
+$ deploy/codebuild_build.sh -i aws/codebuild/standard:3.0 -s docker/app -c -a /tmp
+
+Per il deploy di Nginx:
+$ deploy/codebuild_build.sh -i aws/codebuild/standard:3.0 -s docker/nginx -c -a /tmp
+
+Nella directory deploy è presente anche la policy con i permessi necessari per eseguire gli uploads delle immagini su ECR.
 
 
